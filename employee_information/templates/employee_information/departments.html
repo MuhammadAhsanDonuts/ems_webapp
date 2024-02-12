@@ -1,0 +1,149 @@
+{% extends "employee_information/base.html" %}
+
+{% block pageContent %}
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Employee Monitored Hours</h4>
+            <div class="text-start">
+                <button class="mdc-button mdc-button--raised mdc-ripple-upgraded btn-sm" id="create_new"><i class="material-icons mdc-button__icon">add</i><span> Add New</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <!-- Filter Section -->
+        
+            <div class="form-group">
+           
+        <!-- Table Section -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <colgroup>
+                    <!-- Add colgroups as per your requirements -->
+                </colgroup>
+                <thead>
+                    <thead>
+                        <tr>
+                            <th class="text-center py-2 font-weight-bold h4">#</th>
+                            <th class="text-center py-2 font-weight-bold h4">User Name</th>
+                            <th class="text-center py-2 font-weight-bold h4">RM</th>
+                            <th class="text-center py-2 font-weight-bold h4">DM</th>
+                            <th class="text-center py-2 font-weight-bold h4">Store Name</th>
+                            <th class="text-center py-2 font-weight-bold h4">Total Employees</th>
+                            <th class="text-center py-2 font-weight-bold h4">Total Traffic</th>
+                            <th class="text-center py-2 font-weight-bold h4">Conversion Rate</th>
+                            <th class="text-center py-2 font-weight-bold h4">Unmonitored Boxes</th>
+                            <th class="text-center py-2 font-weight-bold h4">Gross Profit ($)</th>
+                            <th class="text-center py-2 font-weight-bold h4">Profit per Visitor</th>
+                            <th class="text-center py-2 font-weight-bold h4">Unmonitored Gross Profit</th>
+                            <th class="text-center py-2 font-weight-bold h4">Total Gross Profit</th>
+                            <th class="text-center py-2 font-weight-bold h4">Monitored Percentage</th>
+                        </tr>
+                    </thead>
+                    
+                <tbody id="employee_table_body">
+                    <tr>
+                        <td class="px-2 py-1 text-center">1</td>
+                        <td class="px-2 py-1 text-start">JohnDoe</td>
+                        <td class="px-2 py-1 text-start">John</td>
+                        <td class="px-2 py-1 text-start">Doe</td>
+                        <td class="px-2 py-1 text-start">Store123</td>
+                        <td class="px-2 py-1 text-start">50</td>
+                        <td class="px-2 py-1 text-start">1200</td>
+                        <td class="px-2 py-1 text-start">5%</td>
+                        <td class="px-2 py-1 text-start">2</td>
+                        <td class="px-2 py-1 text-start">5000</td>
+                        <td class="px-2 py-1 text-start">$4.17</td>
+                        <td class="px-2 py-1 text-start">2000</td>
+                        <td class="px-2 py-1 text-start">$7000</td>
+                        <td class="px-2 py-1 text-start">80%</td>
+                    </tr>
+                    <tr>
+                        <td class="px-2 py-1 text-center">2</td>
+                        <td class="px-2 py-1 text-start">JaneSmith</td>
+                        <td class="px-2 py-1 text-start">Jane</td>
+                        <td class="px-2 py-1 text-start">Smith</td>
+                        <td class="px-2 py-1 text-start">Store456</td>
+                        <td class="px-2 py-1 text-start">30</td>
+                        <td class="px-2 py-1 text-start">800</td>
+                        <td class="px-2 py-1 text-start">8%</td>
+                        <td class="px-2 py-1 text-start">1</td>
+                        <td class="px-2 py-1 text-start">3000</td>
+                        <td class="px-2 py-1 text-start">$3.75</td>
+                        <td class="px-2 py-1 text-start">1200</td>
+                        <td class="px-2 py-1 text-start">$4200</td>
+                        <td class="px-2 py-1 text-start">75%</td>
+                    </tr>
+                    <!-- Add more rows with similar structure and dynamic data -->
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#create_new').click(function() {
+            uni_modal("Add New Employee", "{% url 'manage_employees-page' %}", 'modal-lg')
+        })
+        $('.view-data').click(function() {
+            uni_modal("Employee Details", "{% url 'view-employee-page' %}?id=" + $(this).attr('data-id'), 'mid-large')
+        })
+        $('.edit-data').click(function() {
+            uni_modal("Edit Employee", "{% url 'manage_employees-page' %}?id=" + $(this).attr('data-id'), 'modal-lg')
+        })
+        $('.delete-data').click(function() {
+            _conf("Are you sure to delete this employee?", "delete_employee", [$(this).attr('data-id')])
+        })
+
+        function updateTable(data) {
+            $('#employee_table_body').empty();
+            for (const employee of data) {
+                let row = `<tr>
+                    <!-- Add your table columns as per your requirements -->
+                </tr>`;
+                $('#employee_table_body').append(row);
+            }
+        }
+
+        function generateReport() {
+            let data = [
+                // Sample data
+            ];
+
+            updateTable(data);
+        }
+
+        function downloadReport() {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            let rows = document.querySelectorAll("table tr");
+
+            rows.forEach(function (row) {
+                let rowData = [];
+                let cols = row.querySelectorAll("td, th");
+
+                cols.forEach(function (col) {
+                    rowData.push(col.innerText);
+                });
+
+                csvContent += rowData.join(",") + "\n";
+            });
+
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "employee_report.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
+    })
+
+    function delete_employee($id) {
+        // Your existing delete function
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "employee_information/base.html" %}
+{% load humanize %}
+
+{% block pageContent %}
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="d-flex justify-content-between">
+            <h4 class="card-title mb-0">Dashboard</h4>
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <hr class="w-100">
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title">Conversions</h5>
+            <canvas id="conversionsChart" width="200" height="200"></canvas>
+            <p class="tx-12 text-muted">Overall Count of Conversions</p>
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+    <div class="mdc-card info-card info-card--primary">
+        <div class="card-inner">
+            <h5 class="card-title">Employees</h5>
+            <canvas id="employeesChart" width="200" height="200"></canvas>
+            <p class="tx-12 text-muted">Overall Count of Employees</p>
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+    <div class="mdc-card info-card info-card--info">
+        <div class="card-inner">
+            <h5 class="card-title">Gross Profit per Customer</h5>
+            <canvas id="profitChart" width="200" height="200"></canvas>
+            <p class="tx-12 text-muted">Gross Profit per Customer over Time</p>
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet">
+    <div class="mdc-card info-card info-card--warning">
+        <div class="card-inner">
+            <h5 class="card-title">Unattended</h5>
+            <canvas id="unattendedChart" width="200" height="200"></canvas>
+            <p class="tx-12 text-muted">Unattended Cases over Time</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var conversionsData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Conversions',
+                data: [12, 19, 3, 5, 2, 3],
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointRadius: 3,
+            }]
+        };
+
+        var employeesData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Employees',
+                data: [8, 15, 5, 8, 12, 10],
+                fill: false,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 2,
+                pointRadius: 3,
+            }]
+        };
+
+        var profitData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Gross Profit per Customer',
+                data: [200, 180, 250, 220, 300, 270],
+                fill: false,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2,
+                pointRadius: 3,
+            }]
+        };
+
+        var unattendedData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Unattended Cases',
+                data: [10, 8, 12, 15, 7, 9],
+                fill: false,
+                borderColor: 'rgba(255, 193, 7, 1)',
+                borderWidth: 2,
+                pointRadius: 3,
+            }]
+        };
+
+        var conversionsChartCanvas = document.getElementById('conversionsChart').getContext('2d');
+        var employeesChartCanvas = document.getElementById('employeesChart').getContext('2d');
+        var profitChartCanvas = document.getElementById('profitChart').getContext('2d');
+        var unattendedChartCanvas = document.getElementById('unattendedChart').getContext('2d');
+
+        var conversionsChart = new Chart(conversionsChartCanvas, {
+            type: 'line',
+            data: conversionsData,
+        });
+
+        var employeesChart = new Chart(employeesChartCanvas, {
+            type: 'line',
+            data: employeesData,
+        });
+
+        var profitChart = new Chart(profitChartCanvas, {
+            type: 'line',
+            data: profitData,
+        });
+
+        var unattendedChart = new Chart(unattendedChartCanvas, {
+            type: 'line',
+            data: unattendedData,
+        });
+    });
+</script>
+{% endblock pageContent %}

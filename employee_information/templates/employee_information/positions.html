@@ -1,0 +1,78 @@
+{% extends "employee_information/base.html" %}
+{% block pageContent %}
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Daily Monitored Details</h4>
+            <div class="text-start">
+                <!-- Add your radio buttons, date filter, generate reports, and download button here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <!-- Table for Store -->
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <colgroup>
+                    <!-- Adjust the column widths based on your preference -->
+                    <col width="5%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="15%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center py-1">#</th>
+                        <th class="text-center py-1">Time Wise</th>
+                        <th class="text-center py-1">Monitored Days Avg</th>
+                        <th class="text-center py-1">Company Avg</th>
+                        <th class="text-center py-1">Store 1</th>
+                        <th class="text-center py-1">Store 2</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Static data for illustration, replace with dynamic data -->
+                    <tr>
+                        <td class="px-2 py-1 text-center">1</td>
+                        <td class="px-2 py-1 text-center">1-1</td>
+                        <td class="px-2 py-1 text-center">100.00%</td>
+                        <td class="px-2 py-1 text-center">2</td>
+                        <td class="px-2 py-1 text-center">24</td>
+                        <!-- Add more cells as needed -->
+                    </tr>
+                    <tr>
+                        <td class="px-2 py-1 text-center">2</td>
+                        <td class="px-2 py-1 text-center">1-2</td>
+                        <td class="px-2 py-1 text-center">95.00%</td>
+                        <td class="px-2 py-1 text-center">10</td>
+                        <td class="px-2 py-1 text-center">69</td>
+                        <!-- Add more cells as needed -->
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock pageContent %}
+
+{% block ScriptBlock %}
+<script>
+    $(function() {
+        // Add your scripts for radio buttons, date filter, generate reports, and download button here
+        // ...
+
+        // Sample script for updating the store table (adjust based on your logic)
+        function updateStoreTable(data) {
+            // Update the store table with the provided data
+            // This is a placeholder, you need to implement your own logic here
+        }
+    })
+</script>
+{% endblock ScriptBlock %}
