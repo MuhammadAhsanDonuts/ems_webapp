@@ -2,15 +2,20 @@ version: '3'
 
 services:
   django:
-    image: dockeriddonuts/ems_run:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
 
   nginx:
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: nginx-conf/Dockerfile.nginx
     ports:
       - "80:80"
-    volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - "443:443"
+    # volumes:
+    #   - ./nginx-conf/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - django
