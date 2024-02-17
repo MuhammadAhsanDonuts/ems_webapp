@@ -44,3 +44,16 @@ class Employees(models.Model):
 
     def __str__(self):
         return self.firstname + ' ' +self.middlename + ' '+self.lastname + ' '
+    
+    from django.db import models
+
+class Schedule(models.Model):
+    time = models.CharField(max_length=10)
+    mon = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    tue = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    wed = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    thu = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    fri = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    sat = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    sun = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    total = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)

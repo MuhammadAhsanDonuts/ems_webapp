@@ -42,9 +42,26 @@ def login_user(request):
     return HttpResponse(json.dumps(resp),content_type='application/json')
 
 #Logout
+from django.utils import timezone
+
 def logoutuser(request):
-    logout(request)
-    return redirect('/')
+
+
+    # Check if the user is authenticated and the session key exists
+    if request.user.is_authenticated and '_last_activity' in request.session:
+        last_activity_time = request.session['_last_activity']
+        current_time = timezone.now()
+
+        # Check if the inactivity timeout has been reached (10 minutes in this case)
+        if (current_time - last_activity_time).seconds > 600:  # 600 seconds = 10 minutes
+            # Log out the user
+            logout(request)
+            # Redirect to the login page or any other desired destination
+            return redirect('login')  # Assuming your login URL is named 'login'
+
+    # Continue with your existing logic
+    return render(request, 'employee_information/login.html')
+
 
 # Create your views here.
 @login_required

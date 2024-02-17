@@ -1,9 +1,159 @@
-{% extends "employee_information/base.html" %} {% block pageContent %}
+
+{% extends "employee_information/base.html" %}
+
+{% block pageContent %}
 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
-    <div class="mdc-card">
-        <div class="d-flex justify-content-between">
-            <h4 class="card-title mb-0">About Page</h4>
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Heatmap Store Details</h4>
+            <div class="text-start">
+                
+            </div>
         </div>
     </div>
 </div>
-<hr> {% endblock pageContent %}
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <!-- Filter Section -->
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="form-check">
+            </div>
+            <div class="form-group">
+            </div>
+        </div>
+
+        <!-- Heatmap Table Section -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered heatmap-table">
+                <!-- Table Header -->
+                <thead>
+                    <tr>
+                        <th>TIME</th>
+                        <th>MON</th>
+                        <th>TUE</th>
+                        <th>WED</th>
+                        <th>THU</th>
+                        <th>FRI</th>
+                        <th>SAT</th>
+                        <th>SUN</th>
+
+                    </tr>
+                </thead>
+                <!-- Table Body -->
+                <tbody id="heatmap_table_body">
+                    <tr>
+                        <td>9:00 AM</td>
+                        <td>3.12</td>
+                        <td>2.43</td>
+                        <td>1.81</td>
+                        <td>1.06</td>
+                        <td>1.25</td>
+                        <td>0.69</td>
+                        <td>3.36</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>10:00 AM</td>
+                        <td>1.86</td>
+                        <td>0.12</td>
+                        <td>2.74</td>
+                        <td>3.42</td>
+                        <td>2.60</td>
+                        <td>1.09</td>
+                        <td>3.23</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 AM</td>
+                        <td>3.25</td>
+                        <td>3.96</td>
+                        <td>1.12</td>
+                        <td>0.34</td>
+                        <td>1.61</td>
+                        <td>3.46</td>
+                        <td>2.65</td>
+                    </tr>
+                    <!-- Add more rows with similar structure for the remaining data -->
+                    <tr>
+                        <td>TOTAL</td> 
+                        <td>2.38</td>
+                        <td>3.75</td>
+                        <td>2.72</td>
+                        <td>2.58</td>
+                        <td>3.45</td>
+                        <td>1.14</td>
+                        <td>2.39</td>
+                    </tr>
+                    <tr>
+                        <td>AVG/HOUR</td>
+                        <td>0.84</td>
+                        <td>2.79</td>
+                        <td>0.44</td>
+                        <td>2.60</td>
+                        <td>0.48</td>
+                        <td>0.45</td>
+                        <td>1.81</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        // Call generateReport to initialize the heatmap table with sample data
+        generateReport();
+    });
+
+    function updateHeatmapTable(data) {
+        $('#heatmap_table_body').empty();
+        let columnTotals = Array(data[0].length).fill(0);
+
+        for (const row of data) {
+            let tableRow = '<tr>';
+            for (let i = 0; i < row.length; i++) {
+                // Convert the cell value to a heatmap color and apply to the background
+                let color = heatmapColor(row[i]);
+                tableRow += `<td style="background-color: ${color};">${row[i]}</td>`;
+                // Update column total
+                columnTotals[i] += parseFloat(row[i]);
+            }
+            tableRow += '</tr>';
+            $('#heatmap_table_body').append(tableRow);
+        }
+
+        // Add a row for column totals
+        let totalRow = '<tr><td>TOTAL</td>';
+        for (let i = 1; i < columnTotals.length; i++) {
+            totalRow += `<td>${columnTotals[i].toFixed(2)}</td>`;
+        }
+        totalRow += '</tr>';
+        $('#heatmap_table_body').append(totalRow);
+    }
+
+    function heatmapColor(value) {
+        // Implement your logic to convert the value to a heatmap color
+        // Example: You can use a library like chroma.js for this purpose
+        // For simplicity, a placeholder logic is used here
+        let intensity = parseFloat(value) / 5.0; // Adjust divisor as needed
+        let color = `rgba(255, 0, 0, ${intensity})`; // Red gradient
+        return color;
+    }
+
+    function generateReport() {
+        // Sample heatmap data
+        let data = [
+            ['9:00 AM', '3.12', '2.43', '1.81', '1.06', '1.25', '0.69', '3.36'],
+            ['10:00 AM', '1.86', '0.12', '2.74', '3.42', '2.60', '1.09', '3.23'],
+            ['11:00 AM', '3.25', '3.96', '1.12', '0.34', '1.61', '3.46', '2.65'],
+            // Add more rows with similar structure
+            ['AVG/HOUR', '0.84', '2.79', '0.44', '2.60', '0.48', '0.45', '1.81']
+        ];
+
+        updateHeatmapTable(data);
+    }
+
+
+</script>
+{% endblock %}
