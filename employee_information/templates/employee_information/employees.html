@@ -6,7 +6,10 @@
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="card-title mb-0">Customer Conversion</h4>
             <div class="text-start">
-                <button class="mdc-button mdc-button--raised mdc-ripple-upgraded btn-sm" id="create_new"><i class="material-icons mdc-button__icon">add</i><span> Add New</span></button>
+                <div class="form-group">
+                    <label for="start_date" class="d-none d-md-inline">Start Date:</label>
+                    <input type="date" class="form-control form-control-sm" id="start_date" name="start_date">
+                </div>
             </div>
         </div>
     </div>
@@ -20,10 +23,7 @@
                 <input class="form-check-input" type="checkbox" id="include_inactive" name="include_inactive">
                 <label class="form-check-label" for="include_inactive">Include Inactive Stores</label>
             </div>
-            <div class="form-group">
-                <label for="start_date">Start Date:</label>
-                <input type="date" class="form-control" id="start_date" name="start_date">
-            </div>
+          
             <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
             <button class="btn btn-success" onclick="downloadReport()">Download Report</button>
         </div>
