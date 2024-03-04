@@ -7,41 +7,116 @@
             <h4 class="card-title mb-0">Customer Conversion</h4>
             <div class="text-start">
                 <div class="form-group">
-                    <label for="start_date" class="d-none d-md-inline">Start Date:</label>
-                    <input type="date" class="form-control form-control-sm" id="start_date" name="start_date">
+                    
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 
 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
     <div class="mdc-card">
         <!-- Filter Section -->
-        <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="include_inactive" name="include_inactive">
-                <label class="form-check-label" for="include_inactive">Include Inactive Stores</label>
+
+        <style>
+            label {
+                margin-bottom: 10px;
+                font-size: 12px;
+                display: inline-block;
+                margin-right: 20px; /* Adjust the value for spacing between labels */
+            }
+        
+            input[type="date"], input[type="text"] {
+                width: 200px; /* Adjust the value for the desired width */
+                padding: 5px; /* Adjust the value for padding */
+                line-height: 1.5; /* Adjust the value for line height */
+            }
+        </style>
+
+        <form id="flight">
+            <div class="filter-section">
+                <label>
+                    Start Date <br/>
+                    <input type="date" name="arrival" value="Today"/>
+                </label>
+
+                <label>
+                    End Date <br/>
+                    <input type="date" name="arrival" value="Today"/>
+                </label>
+
+                <label>
+                    Stores <br/>
+                    <input type="text" name="stores" placeholder="Multiple Stores"/>
+                </label>
+
+                <label>
+                    <input type="checkbox" name="inclusiveInactiveStores"/>
+                    Inclusive Inactive Stores
+                </label>
             </div>
-          
-            <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
-            <button class="btn btn-success" onclick="downloadReport()">Download Report</button>
+        </form>
+
+        <div class="additional-section">
+            <!-- Additional content goes here -->
         </div>
 
+        <div class="d-flex justify-content-end p-3">
+            <button class="btn btn-primary btn-large" style="background-color: rgb(39, 39, 117); color: white;" onclick="downloadReport()">Generate Report</button>
+
+            <button class="btn btn-danger btn-large ml-2" onclick="downloadReport()"> ↓ </button>
+        </div>
+    </div>
+</div>
+
+        
+        
+
+
+        <div  class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+
+
+
+            <!-- Table for Store -->
+          
+                <style>
+                    .mr-custom {
+                        margin-right: 20px; /* Adjust the value to increase or decrease the right margin */
+                    }
+                </style>
+                
+            
+                
+                
+                
+                
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+                            <col width="100%">
+
+                        </colgroup>
         <!-- Table Section -->
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+        
                 <colgroup>
                     <!-- Add colgroups as per your requirements -->
                 </colgroup>
                 <thead>
                     <tr>
-                        <th class="text-center py-1">#</th>
+                
                         <th class="text-center py-1">Name</th>
-                        <th class="text-center py-1">Region</th>
-                        <th class="text-center py-1">District</th>
-                        <th class="text-center py-1">Store</th>
                         <th class="text-center py-1">Traffic</th>
+                        <th class="text-center py-1">Boxes</th>
                         <th class="text-center py-1">Conversion</th>
                         <th class="text-center py-1">Unmonitored Boxes</th> 
                         <th class="text-center py-1">Gross Profit ($)</th>
@@ -53,83 +128,119 @@
                 </thead>
                 <tbody id="employee_table_body">
                     <tr>
-                        <td class="px-2 py-1 text-center">1</td>
-                        <td class="px-2 py-1 text-start">Sam</td>
-                        <td class="px-2 py-1 text-start">UK</td>
-                        <td class="px-2 py-1 text-start">Nil</td>
-                        <td class="px-2 py-1 text-start">73873</td>
-                        <td class="px-2 py-1 text-start">23%</td>
-                        <td class="px-2 py-1 text-start">787882</td>
-                        <td class="px-2 py-1 text-start">6727</td>
-                        <td class="px-2 py-1 text-start">1</td>
-                        <td class="px-2 py-1 text-start">722</td>
-                        <td class="px-2 py-1 text-start">1234</td>
-                        <td class="px-2 py-1 text-start">1</td>
-                        <td class="px-2 py-1 text-start">5%</td>
+                        <td class="px-2 py-1 text-start">Region</td>
+                        <td class="px-2 py-1 text-start">215360</td>
+                        <td class="px-2 py-1 text-start">62631</td>
+                        <td class="px-2 py-1 text-start">28.96%</td>
+                        <td class="px-2 py-1 text-start">787</td>
+                        <td class="px-2 py-1 text-start">$ 7,826,3896,727</td>
+                        <td class="px-2 py-1 text-start">$ 43.73 </td>
+                        <td class="px-2 py-1 text-start">$ 12, 352.74</td>
+                        <td class="px-2 py-1 text-start">$1,731,399.53</td>
+                        <td class="px-2 py-1 text-start">99.45%</td>
                     </tr>
 
                     <tr>
-                        <td class="px-2 py-1 text-center">2</td>
-                        <td class="px-2 py-1 text-start">John</td>
-                        <td class="px-2 py-1 text-start">UK</td>
-                        <td class="px-2 py-1 text-start">Nil</td>
-                        <td class="px-2 py-1 text-start">653</td>
-                        <td class="px-2 py-1 text-start">3%</td>
-                        <td class="px-2 py-1 text-start">9982</td>
-                        <td class="px-2 py-1 text-start">8827</td>
-                        <td class="px-2 py-1 text-start">2</td>
-                        <td class="px-2 py-1 text-start">72</td>
-                        <td class="px-2 py-1 text-start">14</td>
-                        <td class="px-2 py-1 text-start">7</td>
-                        <td class="px-2 py-1 text-start">7%</td>
+                        <td class="px-2 py-1 text-start">District</td>
+                        <td class="px-2 py-1 text-start">73774938</td>
+                        <td class="px-2 py-1 text-start">35789</td>
+                        <td class="px-2 py-1 text-start">29.58%</td>
+                        <td class="px-2 py-1 text-start">453</td>
+                        <td class="px-2 py-1 text-start">$ 5,678,234</td>
+                        <td class="px-2 py-1 text-start">$ 32.11 </td>
+                        <td class="px-2 py-1 text-start">$ 8,765.90</td>
+                        <td class="px-2 py-1 text-start">$1,234,567.89</td>
+                        <td class="px-2 py-1 text-start">98.72%</td>
+                    </tr>
+                    
+
+                    <tr>
+                        <td class="px-2 py-1 text-start">Store</td>
+                        <td class="px-2 py-1 text-start">98765</td>
+                        <td class="px-2 py-1 text-start">45678</td>
+                        <td class="px-2 py-1 text-start">20.34%</td>
+                        <td class="px-2 py-1 text-start">654</td>
+                        <td class="px-2 py-1 text-start">$ 8,765,432</td>
+                        <td class="px-2 py-1 text-start">$ 28.45 </td>
+                        <td class="px-2 py-1 text-start">$ 15,432.67</td>
+                        <td class="px-2 py-1 text-start">$2,345,678.90</td>
+                        <td class="px-2 py-1 text-start">95.81%</td>
+                    </tr>
+
+                    
+
+                    <tr>
+                        <td class="px-2 py-1 text-start">Employee 1</td>
+                        <td class="px-2 py-1 text-start">54321</td>
+                        <td class="px-2 py-1 text-start">23456</td>
+                        <td class="px-2 py-1 text-start">15.67%</td>
+                        <td class="px-2 py-1 text-start">876</td>
+                        <td class="px-2 py-1 text-start">$ 4,567,890</td>
+                        <td class="px-2 py-1 text-start">$ 21.89 </td>
+                        <td class="px-2 py-1 text-start">$ 10,876.54</td>
+                        <td class="px-2 py-1 text-start">$987,654.32</td>
+                        <td class="px-2 py-1 text-start">91.23%</td>
+                    </tr>
+                    
+
+                    <tr>
+                        <td class="px-2 py-1 text-start">Employee 2</td>
+                        <td class="px-2 py-1 text-start">76543</td>
+                        <td class="px-2 py-1 text-start">87654</td>
+                        <td class="px-2 py-1 text-start">30.45%</td>
+                        <td class="px-2 py-1 text-start">321</td>
+                        <td class="px-2 py-1 text-start">$ 6,543,210</td>
+                        <td class="px-2 py-1 text-start">$ 35.67 </td>
+                        <td class="px-2 py-1 text-start">$ 18,765.43</td>
+                        <td class="px-2 py-1 text-start">$1,234,567.89</td>
+                        <td class="px-2 py-1 text-start">97.15%</td>
                     </tr>
 
                     <tr>
-                        <td class="px-2 py-1 text-center">3</td>
-                        <td class="px-2 py-1 text-start">76</td>
-                        <td class="px-2 py-1 text-start">US</td>
-                        <td class="px-2 py-1 text-start">Nil</td>
-                        <td class="px-2 py-1 text-start">367</td>
-                        <td class="px-2 py-1 text-start">7%</td>
-                        <td class="px-2 py-1 text-start">967</td>
-                        <td class="px-2 py-1 text-start">8687</td>
-                        <td class="px-2 py-1 text-start">986</td>
-                        <td class="px-2 py-1 text-start">9</td>
-                        <td class="px-2 py-1 text-start">19687</td>
-                        <td class="px-2 py-1 text-start">1</td>
-                        <td class="px-2 py-1 text-start">8%</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 py-1 text-center">4</td>
-                        <td class="px-2 py-1 text-start">79</td>
-                        <td class="px-2 py-1 text-start">Melbourne</td>
-                        <td class="px-2 py-1 text-start">Nil</td>
-                        <td class="px-2 py-1 text-start">257</td>
-                        <td class="px-2 py-1 text-start">3%</td>
-                        <td class="px-2 py-1 text-start">547</td>
-                        <td class="px-2 py-1 text-start">2972</td>
-                        <td class="px-2 py-1 text-start">872</td>
-                        <td class="px-2 py-1 text-start">3</td>
-                        <td class="px-2 py-1 text-start">72973</td>
-                        <td class="px-2 py-1 text-start">8</td>
-                        <td class="px-2 py-1 text-start">5%</td>
+                        <td class="px-2 py-1 text-start">Employee 3</td>
+                        <td class="px-2 py-1 text-start">987654</td>
+                        <td class="px-2 py-1 text-start">345678</td>
+                        <td class="px-2 py-1 text-start">18.23%</td>
+                        <td class="px-2 py-1 text-start">567</td>
+                        <td class="px-2 py-1 text-start">$ 9,876,543</td>
+                        <td class="px-2 py-1 text-start">$ 29.54 </td>
+                        <td class="px-2 py-1 text-start">$ 14,567.89</td>
+                        <td class="px-2 py-1 text-start">$2,345,678.90</td>
+                        <td class="px-2 py-1 text-start">94.67%</td>
                     </tr>
 
+
                     <tr>
-                        <td class="px-2 py-1 text-center">5</td>
-                        <td class="px-2 py-1 text-start">27</td>
-                        <td class="px-2 py-1 text-start">US</td>
-                        <td class="px-2 py-1 text-start">Nil</td>
-                        <td class="px-2 py-1 text-start">587</td>
-                        <td class="px-2 py-1 text-start">9%</td>
-                        <td class="px-2 py-1 text-start">457</td>
-                        <td class="px-2 py-1 text-start">625</td>
-                        <td class="px-2 py-1 text-start">62763</td>
-                        <td class="px-2 py-1 text-start">10</td>
-                        <td class="px-2 py-1 text-start">72877</td>
-                        <td class="px-2 py-1 text-start">2</td>
-                        <td class="px-2 py-1 text-start">6%</td>
+                        <td class="px-2 py-1 text-start">Employee 4</td>
+                        <td class="px-2 py-1 text-start">234567</td>
+                        <td class="px-2 py-1 text-start">87654</td>
+                        <td class="px-2 py-1 text-start">25.89%</td>
+                        <td class="px-2 py-1 text-start">432</td>
+                        <td class="px-2 py-1 text-start">$ 5,432,109</td>
+                        <td class="px-2 py-1 text-start">$ 31.76 </td>
+                        <td class="px-2 py-1 text-start">$ 11,234.56</td>
+                        <td class="px-2 py-1 text-start">$1,987,654.32</td>
+                        <td class="px-2 py-1 text-start">96.34%</td>
                     </tr>
+
+
+
+                    <tr>
+                        <td class="px-2 py-1 text-start">Employee 5</td>
+                        <td class="px-2 py-1 text-start">876543</td>
+                        <td class="px-2 py-1 text-start">12345</td>
+                        <td class="px-2 py-1 text-start">12.67%</td>
+                        <td class="px-2 py-1 text-start">789</td>
+                        <td class="px-2 py-1 text-start">$ 7,654,321</td>
+                        <td class="px-2 py-1 text-start">$ 36.89 </td>
+                        <td class="px-2 py-1 text-start">$ 9,876.54</td>
+                        <td class="px-2 py-1 text-start">$876,543.21</td>
+                        <td class="px-2 py-1 text-start">89.56%</td>
+                    </tr>
+                    
+                    
+                    
+                    
                 </tbody>
             </table>
         </div>

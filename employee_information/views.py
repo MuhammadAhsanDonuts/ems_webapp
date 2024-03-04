@@ -269,3 +269,12 @@ def view_employee(request):
         'positions' : positions
     }
     return render(request, 'employee_information/view_employee.html',context)
+
+
+
+from django.shortcuts import render
+
+def user_management(request):
+    # Your user management logic here
+    return render(request, 'employee_information/user_management.html')
+

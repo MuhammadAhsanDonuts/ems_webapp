@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.views.generic.base import RedirectView
+from .views import user_management
+
 
 urlpatterns = [
     path('redirect-admin', RedirectView.as_view(url="/admin"),name="redirect-admin"),
@@ -24,4 +26,8 @@ urlpatterns = [
     path('save_employee', views.save_employee, name="save-employee-page"),
     path('delete_employee', views.delete_employee, name="delete-employee"),
     path('view_employee', views.view_employee, name="view-employee-page"),
+    # Existing patterns
+    path('user-management/', views.user_management, name='user_management'),
 ]
+
+
